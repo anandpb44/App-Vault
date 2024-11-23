@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="uname" id="" placeholder="user name"><br>
+            <input type="email" name="email" id="" placeholder="Email ID"><br>
+            <input type="password" name="password" id="" placeholder="password">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>

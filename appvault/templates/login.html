@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Vault Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vault.css' %}">
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="login">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="uname" id="" placeholder="User Name"> <br>
+            <input type="password" name="password" id="" placeholder="password"><br>
+            <input type="submit" value="Login"><a href="register">Register</a>
+        </form>
+    </div>
+</body>
+</html>

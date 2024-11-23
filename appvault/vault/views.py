@@ -4,13 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 # Create your views here.
-def login(req):
+def u_login(req):
     if req.method=='POST':
         uname=req.POST['uname']
         password=req.POST['password']
         vault=authenticate(username=uname,password=password)
         if vault:
-            login(req)
+            login(req,vault)
             return redirect(u_vault)
     else:
         
@@ -25,7 +25,7 @@ def register(req):
         try:
             data=User.objects.create_user(first_name=uname,email=email,username=email,password=pswd)
             data.save()
-            return redirect(login)
+            return redirect(u_login)
         except:
             messages.warning(req,'Email Already Exit')
             return redirect(register)
@@ -33,5 +33,8 @@ def register(req):
         return render(req,'user/register.html')
 def u_vault(req):
     return render(req,'user/vault.html')
+
+def vault_add(req):
+    return render(req,'add_vault.html')
 
 

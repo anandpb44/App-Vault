@@ -1,20 +1,29 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from .models import *
 from django.contrib.auth.models import User
 
 # Create your views here.
 def u_login(req):
+    if 'vault' in req.session:
+        return redirect(u_vault)
     if req.method=='POST':
         uname=req.POST['uname']
         password=req.POST['password']
         vault=authenticate(username=uname,password=password)
         if vault:
             login(req,vault)
-            return redirect(u_vault)
+       
+        return redirect(u_vault)
     else:
         
         return render(req,'login.html')
+    
+def u_logout(req):
+    logout(req)
+    req.session.flush()
+    return redirect(u_login)
     
 
 def register(req):
@@ -32,9 +41,19 @@ def register(req):
     else:
         return render(req,'user/register.html')
 def u_vault(req):
-    return render(req,'user/vault.html')
+    data=File.objects.filter(user=req.user)
+    return render(req,'user/vault.html',{'data':data})
 
-def vault_add(req):
-    return render(req,'add_vault.html')
+def add_vault(req,id):
+    if req.method=='POST':
+        user=User.objects.get(pk=id)
+        name=req.POST['name']
+        files=req.FILES['files']
+        data=File.objects.create(user=user,name=name,files=files)
+        data.save()
+        return redirect(u_vault)
+    else:
+        
+        return render(req,'user/add_vault.html')
 
 

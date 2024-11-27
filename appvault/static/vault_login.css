@@ -1,6 +1,16 @@
+body{
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+
 .login{
     width: 30%;
     margin: auto;
     margin-top: 30vh;
     border-radius: solid black;
+}
+.submit{
+    gap: 10px;
 }

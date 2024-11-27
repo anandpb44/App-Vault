@@ -3,8 +3,9 @@ from vault import views
 
 urlpatterns=[
    path('',views.u_login),
+   path('logout',views.u_logout),
    path('register',views.register),
    path('uvault',views.u_vault),
-   path('add_vault',views.vault_add),
+   path('add/<id>',views.add_vault),
     
 ]

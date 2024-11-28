@@ -7,5 +7,6 @@ urlpatterns=[
    path('register',views.register),
    path('uvault',views.u_vault),
    path('add/<id>',views.add_vault),
+   path('delete/<id>',views.delete)
     
 ]

@@ -14,10 +14,11 @@ def u_login(req):
         vault=authenticate(username=uname,password=password)
         if vault:
             login(req,vault)
-       
+        else:
+            messages.warning(req,'Invalid user name or password')
+            return redirect(u_login)
         return redirect(u_vault)
     else:
-        
         return render(req,'login.html')
     
 def u_logout(req):
@@ -55,5 +56,8 @@ def add_vault(req,id):
     else:
         
         return render(req,'user/add_vault.html')
-
+def delete(req,id):
+    data=File.objects.get(pk=id)
+    data.delete()
+    return redirect(u_vault)
 
